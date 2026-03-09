@@ -1,0 +1,82 @@
+@import url('https://fonts.cdnfonts.com/css/more-sugar');
+
+
+*{
+    background-color: #a2d5ab;
+    text-align: center;
+    margin: 10px;
+    padding: 0px
+
+}
+
+
+@font-face {
+    font-family: 'More Sugar';
+    src: url('fonts/MoreSugar.woff2') format('woff2')/* Preferencial */
+         url('fonts/MoreSugar.woff') format('woff'), url('fonts/MoreSugar.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* Aplicando a fonte no corpo do site ou em elementos específicos */
+body {
+    font-family: 'More Sugar', sans-serif;
+}
+
+h1 {
+    font-family: 'More Sugar', cursive;
+    color: #558122;
+    font-size: 45px;
+}
+
+h2{
+
+font-size: 35px;
+color: #61b160
+
+}
+
+h4{
+
+font-size: 18px;
+
+}
+
+.container{
+
+    display:flex;
+    gap: 10px;  
+    align-items: center;
+    justify-content: center;
+}
+
+
+
+img {
+
+    padding: 32px;
+    border-radius: 100%
+
+}
+
+h3{
+    font-family: 'More Sugar', cursive;
+    color: #243f06;
+    font-size: 30px;
+}
+
+.projeto {
+
+    display: inline-block;
+    background-color: aquamarine;
+    border : 1px solid;
+    padding: 20px;
+    margin: 15px;
+    border-radius: 5px;
+}
+
+li:nth-child(odd) { 
+background-color: #80c57a; 
+} 
+
+ 
