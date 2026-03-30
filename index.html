@@ -6,7 +6,12 @@
     <title>Flexsite</title>
     <link rel=" stylesheet" href="estilo.css"
 </head>
+
 <body>
+    <input type="checkbox" id="tema">
+
+    <div class = "conteudo">
+
     <header>
         <h1 class = "Título">Flexsite</h1>
         <div class = "navbar" id = "navbar" >
@@ -15,26 +20,43 @@
                 <a>sobre</a>
                 <a>projetos</a>
                 <a>contato</a>
-                <p>🌓</p>
+                <label for="tema" class="navbar">
+                <div class="switch">🌓 </div>
+                </label>
         
         </div>
+         <input type="checkbox" id="menu-toggle" hidden>
+
+            <label for="menu-toggle" class="hamburguer">☰</label>
+
+            <nav class="menu">
+                <a href="#" class="botao2">Início</a>
+                <a href="#" class="botao2">Sobre</a>
+                <a href="#" class="botao2">Projeto</a>
+                <a href="#" class="botao2">Contato</a>
+
+            </nav>
     </header>
     
-    <section>
-        <h2> Bem-vindo ao Flexsite </h2>
-        <h3> Esse site agora tem menu escondido e tema escuro com CSS puro </h3>
-    </section>
+        <section>
+            <div class="texto">
+                <h2 >Bem vindo ao Flex site</h2>
+                <h5>Este site agora tem um menu escondido e tema escuro com CSS puro</h5>
+            </div>
+            <div class="container">
+                <h3 class="botao">Card 1</h3>
+                <h3 class="botao">Card 2</h3>
+                <h3 class="botao">Card 3</h3>
 
-    <div class = "container">
-        <h3 class=" botao" >Card 1</h3>
-        <h3 class=" botao" >Card 2</h3>
-        <h3 class=" botao" >Card 3</h3>
-    </div>
+
+            </div>
+        </section>
 
     <footer>
-        <h4>2025 flexsite. Todos os direitos reservados.</h4>
+        <h4> @2025 flexsite. Todos os direitos reservados.</h4>
     </footer>
 
+</div>
 </body>
 
 </html>
