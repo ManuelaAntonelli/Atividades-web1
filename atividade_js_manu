@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciador de tarefas</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <h2>Gerenciador de tarefas</h2>
+    <div class="card" style="width: 18rem;">
+    <div class="card-body">
+        <h5 class="card-title">Nova tarefa</h5>
+        <input type = "text" id = "nova_tarefa">
+        <button type="button" class="btn btn-primary">OK</button>
+    </div>
+    </div>
+
+    <div class="card" style="width: 18rem;">
+    <div class="card-body">
+        <h5 class="card-title" id="titulo-tarefa">Tarefa</h5>
+        <input type ="text" id = "tarefa">
+        <select id="prioridade">
+        <option>baixa</option>
+        <option>média</option>
+        <option>alta</option>
+        </select>
+        <button onclick="mostrar()">Mostrar</button>
+    </div>
+    </div>
+
+    <script>
+    
+    const btnOk = document.getElementById("btn-ok");
+    const inputNovaTarefa = document.getElementById("nova_tarefa");
+    const tituloCard = document.getElementById("titulo-tarefa");
+
+    btnOk.addEventListener("click", () => {
+        
+        tituloCard.innerText = inputNovaTarefa.value;
+    });
+
+    function mostrar() {
+        let valor = document.getElementById("tarefa").value;
+        let estado = document.getElementById("prioridade").value;
+        alert("Tarefa: " + tituloCard.innerText + " | Conteúdo: " + valor + " | Prioridade: " + estado);
+    }
+    </script>
+    
+
+
+</body>
+</html>
