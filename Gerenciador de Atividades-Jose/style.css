@@ -1,0 +1,27 @@
+.card { 
+    position: relative;
+    transition: border 0.3s ease-in-out; 
+}
+
+.btn-close:hover {
+    filter: brightness(0.5);
+}
+
+.card-baixa { border: 5px solid #198754 !important; } 
+.card-media { border: 5px solid #ffc107 !important; } 
+.card-alta { border: 5px solid #dc3545 !important; }
+
+body{
+    background-color: whitesmoke;
+    padding: 15px;
+}
+
+h2{
+    text-align: center;
+    gap: 5px;
+    background-color: whitesmoke;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+
