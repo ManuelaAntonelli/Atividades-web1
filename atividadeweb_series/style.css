@@ -1,0 +1,12 @@
+body{
+    background-color: aliceblue;
+    padding: 15px;
+}
+
+h2{
+    text-align: center;
+    gap: 5px;
+    background-color: antiquewhite;
+    border-radius: 5px;
+    padding: 5px;
+}
