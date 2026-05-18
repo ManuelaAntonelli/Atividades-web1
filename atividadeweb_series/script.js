@@ -1,57 +1,109 @@
-const API = 'https://api.tvmaze.com/search/shows?q=girls'
+const form = document.getElementById('search-form');
+const input = document.getElementById('search-input');
+const resultsContainer = document.getElementById('results-container');
+const loading = document.getElementById('loading');
+const messageArea = document.getElementById('message-area');
 
-fetch(API)
-    .then(resposta => resposta.json())
-    .then(dados => {
-        const container = document.getElementById('conteudo-api')
+form.addEventListener('submit', async function(event) {
+    event.preventDefault(); 
 
-        container.innerHTML =  `
-            <h2>${dados.titulo}</h2>
-            <p>${dados.descricao}</p>
-        `;
-    })
+    const query = input.value.trim();
 
-    .catch(erro => {
-        console.erro('Erro: ', erro )
-    })
+    if (query === '') {
+        showMessage('Digite o nome da série', 'warning');
+        return;
 
-function adicionar_tarefa() {
-        const input = document.getElementById('tarefaInput');
-        const lista = document.getElementById('listaTarefas');
+    resultsContainer.innerHTML = '';
+    hideMessage();}
+    
+    loading.classList.remove('d-none');
 
-        if (input.value.trim() === "") return;
+    try {
+        const response = await fetch(`https://api.tvmaze.com/search/shows?q=${query}`);
         
-        const col = document.createElement('div');
-        col.className = 'col-md-4 mb-3';
+        if (!response.ok) {
+            throw new Error('Erro na comunicação com o servidor');
+        }
+
+        const data = await response.json();
+
+        loading.classList.add('d-none');
+
+        if (data.length === 0) {
+            showMessage(`Nenhuma série encontrada para "${query}".`, 'info');
+            return;
+        }
+
+        data.forEach(item => {
+            createCard(item.show, item.score);
+        });
+
+    } catch (error) {
+        loading.classList.add('d-none');
+        showMessage('Erro ao buscar os dados', 'danger');
+        console.error('Erro:', error);
+    }
+});
+
+function showMessage(text, type) {
+    messageArea.className = `alert alert-${type} text-center mb-4`;
+    messageArea.textContent = text;
+    messageArea.classList.remove('d-none');
+}
+
+function hideMessage() {
+    messageArea.classList.add('d-none');
+    messageArea.textContent = '';
+}
+
+function createCard(show, score) {
+    const col = document.createElement('div');
+    col.className = 'col-12 col-sm-6 col-md-4 col-lg-3 d-flex align-items-stretch';
+
+    const card = document.createElement('div');
+    card.className = 'card w-100 shadow-sm border-0';
+
+    if (show.image && show.image.medium) {
+        const img = document.createElement('img');
+        img.className = 'card-img-top';
+        img.src = show.image.medium;
+        img.alt = `Capa da série ${show.name}`;
+        card.appendChild(img);
+    } else {
+        const noImageDiv = document.createElement('div');
+        noImageDiv.className = 'no-image-placeholder card-img-top';
         
-        const prioridadeInicial = 'baixa';
-
-        col.innerHTML = `
-            <div class="card card-${prioridadeInicial} shadow-sm">
-                <div class="card-body">
-                    <h5 class="card-title">${input.value}</h5>
-                    <label class="small text-muted">Prioridade:</label>
-                    <select class="form-select form-select-sm mb-3" onchange="alterarPrioridade(this)">
-                        <option value="baixa" selected>Baixa</option>
-                        <option value="media">Média</option>
-                        <option value="alta">Alta</option>
-                    </select>
-                    <button class="btn btn-sm btn-outline-danger w-100" onclick="this.closest('.col-md-4').remove()">Remover</button>
-                </div>
-            </div>
-        `;
-
-
-        lista.appendChild(col);
-        input.value = ""; 
+        const noImageText = document.createElement('span');
+        noImageText.textContent = 'Sem imagem disponível';
+        
+        noImageDiv.appendChild(noImageText);
+        card.appendChild(noImageDiv);
     }
 
-    function alterarPrioridade(selectElement) {
-        const card = selectElement.closest('.card');
-        const novaPrioridade = selectElement.value;
+    const cardBody = document.createElement('div');
+    cardBody.className = 'card-body d-flex flex-column';
 
-        card.classList.remove('card-baixa', 'card-media', 'card-alta');
-        card.classList.add(`card-${novaPrioridade}`);
-        
-    }
+    const title = document.createElement('h5');
+    title.className = 'card-title fw-bold';
+    title.textContent = show.name;
+
+    const scoreText = document.createElement('p');
+    scoreText.className = 'card-text mt-auto text-secondary mb-0';
+    
+    const formattedScore = score ? (score * 10).toFixed(1) : 'N/A';
+    
+    const scoreStrong = document.createElement('strong');
+    scoreStrong.textContent = 'Score API: ';
+    
+    scoreText.appendChild(scoreStrong);
+    scoreText.appendChild(document.createTextNode(formattedScore));
+
+    cardBody.appendChild(title);
+    cardBody.appendChild(scoreText);
+    
+    card.appendChild(cardBody);
+    col.appendChild(card);
+
+    resultsContainer.appendChild(col);
+}
 
