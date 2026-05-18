@@ -3,36 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Buscar séries</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Buscar Series</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <style>
-        .card-baixa { border: 5px solid #198754 !important; } 
-        .card-media { border: 5px solid #ffc107 !important; } 
-        .card-alta { border: 5px solid #dc3545 !important; }  
-    </style>
 </head>
 
-<body>
-    <div class = "container mt-5"> 
-        <h2>Buscar séries</h2>
+<body class="bg-light">
 
-        <div class="card p-4 mb-4 shadow-sm">
-            <div class="row g-3">
-                <div class="col-md-6">
-                    <input type="text" id="tarefaInput" class="form-control" placeholder="Digite a nova tarefa">
-                </div>
-                <div class="col-md-3">
-                    <button onclick="adicionar_tarefa()" class="btn btn-primary w-100">Adicionar</button>
-                </div>
+    <div class="container py-5">
+        <header class="text-center mb-5">
+            <h1 class="display-5 fw-bold text-black">Buscador de Séries</h1>
+        </header>
+
+        <div class="row justify-content-center mb-4">
+            <div class="col-md-8 col-lg-6">
+                <form id="search-form" class="d-flex shadow-sm rounded">
+                    <input type="text" id="search-input" class="form-control form-control-lg border-0" placeholder="Digite o nome da série">
+                    <button type="submit" class="btn btn-black px-4 border-0">Buscar</button>
+                </form>
             </div>
         </div>
 
-        <div id="listaTarefas" class="row"></div>
+        <div id="message-area" class="text-center mb-4 d-none"></div>
+
+        <div id="loading" class="text-center d-none my-5">
+            <div class="spinner-border text-black" role="status">
+                <span class="visually-hidden">Carregando...</span>
+            </div>
+            <p class="mt-2 text-muted">Buscando séries...</p>
+        </div>
+
+        <div id="results-container" class="row g-4"></div>
     </div>
 
-    <script src="script.js"></script> 
-
+    <script src="script.js"></script>
 </body>
 </html>
